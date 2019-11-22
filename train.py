@@ -7,8 +7,10 @@ import os
 import json
 from yolo.frontend import create_yolo, get_object_labels
 
-os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"]="0"
+# +
+# os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
+# os.environ["CUDA_VISIBLE_DEVICES"]="0"
+# -
 
 argparser = argparse.ArgumentParser(
     description='Train and validate YOLO_v2 model on any dataset')
@@ -38,6 +40,7 @@ def setup_training(config_file):
 if __name__ == '__main__':
     args = argparser.parse_args()
     config, weight_file = setup_training(args.conf)
+    print(weight_file)
     
     if config['train']['is_only_detect']:
         labels = ["object"]
@@ -76,3 +79,5 @@ if __name__ == '__main__':
                config['train']['first_trainable_layer'],
                config['train']['is_only_detect'])
     # loss: 2.1691, train batch jitter=False
+
+
